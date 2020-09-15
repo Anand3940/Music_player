@@ -6,6 +6,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 String[] items;
 ListView listView;
+    private long mLastClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,19 +51,22 @@ runtimepermission();
             }
         }).check();
     }
-
     private void display() {
-final ArrayList<File> arrayList=arrayList(Environment.getExternalStorageDirectory());
-int a =arrayList.size();
-items=new String[a];
-        for(int i=0;i<a;i++)
-        {
-            items[i]=arrayList.get(i).getName().toString().replace(".mp3","").replace("m4a","");
-            final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,items);
+        final ArrayList<File> arrayList=arrayList(Environment.getExternalStorageDirectory());
+        int a =arrayList.size();
+        items=new String[a];
+        for(int i=0;i<a;i++) {
+            items[i] = arrayList.get(i).getName().toString().replace(".mp3", "").replace("m4a", "");
+        }
+            CustomAdapter arrayAdapter=new CustomAdapter(this,items);
             listView.setAdapter(arrayAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
                     String sname= (String) listView.getItemAtPosition(i);
                     Intent intent=new Intent(getApplicationContext(),Player.class);
                     intent.putExtra("songs",arrayList);
@@ -71,7 +76,6 @@ items=new String[a];
                 }
             });
         }
-    }
     public ArrayList<File> arrayList(File file)
     {
         ArrayList<File> arraylist=new ArrayList<File>();

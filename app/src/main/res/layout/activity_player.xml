@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_width="411dp"
+        android:layout_height="427dp"
         android:background="#000000"
-        android:foreground="@mipmap/music1_foreground"
+        android:foreground="@drawable/music1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.624"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.771" />
+        app:layout_constraintVertical_bias="0.718" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -37,43 +37,44 @@
         android:layout_height="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.849" />
 
     <Button
         android:id="@+id/playbutton"
         android:layout_width="71dp"
         android:layout_height="60dp"
-        android:background="@mipmap/play"
+        android:background="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <Button
         android:id="@+id/prevbutton"
         android:layout_width="56dp"
-        android:background="@mipmap/previous"
         android:layout_height="51dp"
+        android:background="@drawable/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.930" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <Button
         android:id="@+id/nextbutton"
         android:layout_width="56dp"
         android:layout_height="51dp"
+        android:background="@drawable/next"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@mipmap/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.930" />
+        app:layout_constraintVertical_bias="0.958" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

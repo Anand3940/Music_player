@@ -77,6 +77,7 @@ Thread updateseekbar;
         Uri u=Uri.parse(arrayList.get(postion).toString());
         mediaPlayer=MediaPlayer.create(getApplicationContext(),u);
         mediaPlayer.start();
+
         seekBar.setMax(mediaPlayer.getDuration());
         updateseekbar.start();
         seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorBlack), PorterDuff.Mode.MULTIPLY);
@@ -84,7 +85,13 @@ Thread updateseekbar;
 seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+        if(b){
+            mediaPlayer.seekTo(i);
+            seekBar.setProgress(i);
+        }
+        else{
+            // the event was fired from code and you shouldn't call player.seekTo()
+        }
     }
 
     @Override
@@ -94,7 +101,7 @@ seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-mediaPlayer.seekTo(seekBar.getProgress());
+       // mediaPlayer.seekTo(seekBar.getProgress());
     }
 });
 play.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +110,12 @@ play.setOnClickListener(new View.OnClickListener() {
         seekBar.setMax(mediaPlayer.getDuration());
         if(mediaPlayer.isPlaying())
         {
-            play.setBackgroundResource(R.drawable.play_foreground);
+            play.setBackgroundResource(R.drawable.play);
             mediaPlayer.pause();
         }
         else
         {
-            play.setBackgroundResource(R.drawable.pause_foreground);
+            play.setBackgroundResource(R.drawable.pause);
             mediaPlayer.start();
         }
     }
