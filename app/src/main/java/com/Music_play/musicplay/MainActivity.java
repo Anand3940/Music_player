@@ -1,4 +1,4 @@
-package com.example.musicplay;
+package com.Music_play.musicplay;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,25 +54,24 @@ runtimepermission();
     }
     private void display() {
         final ArrayList<File> arrayList=arrayList(Environment.getExternalStorageDirectory());
-        int a =arrayList.size();
-        items=new String[a];
-        for(int i=0;i<a;i++) {
-            items[i] = arrayList.get(i).getName().toString().replace(".mp3", "").replace("m4a", "");
+        items=new String[arrayList.size()];
+        for(int i=0;i<arrayList.size();i++) {
+            items[i] = arrayList.get(i).getName()/**.replace(".mp3", "")**/.replace("m4a", "");
         }
             CustomAdapter arrayAdapter=new CustomAdapter(this,items);
             listView.setAdapter(arrayAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                         return;
                     }
                     mLastClickTime = SystemClock.elapsedRealtime();
-                    String sname= (String) listView.getItemAtPosition(i);
+                    String sname= (String) listView.getItemAtPosition(pos);
                     Intent intent=new Intent(getApplicationContext(),Player.class);
                     intent.putExtra("songs",arrayList);
                     intent.putExtra("songname",sname);
-                    intent.putExtra("position",i);
+                    intent.putExtra("position",pos);
                     startActivity(intent);
                 }
             });
@@ -88,12 +88,17 @@ runtimepermission();
             }
             else
             {
-                if(files.getName().endsWith(".mp3")||files.getName().endsWith(".m4a"))
+                if(/**files.getName().endsWith(".mp3")||**/files.getName().endsWith(".m4a"))
                 {
                     arraylist.add(files);
                 }
             }
         }
         return arraylist;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
